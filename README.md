@@ -1,6 +1,4 @@
-# Hello Git!
-
-Welcome to my checkbook application repository!
+# Welcome to my checkbook application repository!
 
 ## Command Line Checkbook Application
 
