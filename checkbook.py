@@ -22,8 +22,7 @@ Please make a selection:
     1) View Current Balance
     2) Make A Withdraw
     3) Make A Deposit
-    4) View Transactions
-    5) Exit (You can also type exit at any prompt to Exit )
+    4) Exit (You can also type exit at any prompt to Exit )
     """)
     
     # Requires user to enter valid selection
@@ -153,9 +152,6 @@ Please make a selection:
         # Write entries into the checkbook file
         with open("checkbook", "w") as f:
             json.dump(checkbook, f)
-
-    # Come back to this, not sure how yet
-    elif selection == "4":
-        print("\nNew feature coming soon!")
+            
     else:
         cf.exit_program
