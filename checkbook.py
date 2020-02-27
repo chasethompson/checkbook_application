@@ -1,10 +1,6 @@
-# Features to add
-# Fix exit type to .lower()
-# Fix blank balance on initial balance pull
-# Add a conditon in withdraw if balance is already neagtive to break out with a message
-
 # Used this resource for json/python https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
 import json
+# Resoure used for datetime https://www.pythonforbeginners.com/basics/python-datetime-time-examples
 from datetime import datetime
 # Helpful resource for os.path/pathlib https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
 import os.path
@@ -13,7 +9,7 @@ import checkbook_functions as cf
 # Welcome statement for users
 print("\n ---- Welcome to your checkbook ---- ")
 
-# Repeats the loop until user exits program
+# Initiate and repeats the loop until user exits program
 # Not sure yet if how I'll do 4
 while True: 
     # User selection options
@@ -22,13 +18,13 @@ Please make a selection:
     1) View Current Balance
     2) Make A Withdraw
     3) Make A Deposit
-    4) Exit (You can also type exit at any prompt to Exit )
+    4) Exit or type exit
     """)
     
     # Requires user to enter valid selection
     while True: 
         selection = input("What would you like to do today? ")
-        if selection == "exit":
+        if selection.lower() == "exit":
             cf.exit_program()
         elif selection in "1234":
             break
@@ -60,7 +56,7 @@ Please make a selection:
     elif selection == "2":
         while True:
             withdraw_amount = input("\nHow much cash would you like to withdaw? ")
-            if withdraw_amount == "exit":
+            if withdraw_amount.lower() == "exit":
                 cf.exit_program()
             elif withdraw_amount.replace(".", "").isdigit():
                 break
@@ -117,7 +113,7 @@ Please make a selection:
     elif selection == "3":
         while True:
             deposit_amount = input("\nHow much would you like to deposit today? ")
-            if deposit_amount == "exit":
+            if deposit_amount.lower() == "exit":
                 cf.exit_program()
             elif deposit_amount.replace(".", "").isdigit():
                 break
@@ -128,7 +124,7 @@ Please make a selection:
         deposit_amount = format(float(deposit_amount), ".2f")
         print(f"\nYour deposit amount: ${deposit_amount}")
 
-        if deposit_amount == "exit":
+        if deposit_amount.lower() == "exit":
             cf.exit_program()
 
         # Diplay new balance to user
@@ -152,6 +148,6 @@ Please make a selection:
         # Write entries into the checkbook file
         with open("checkbook", "w") as f:
             json.dump(checkbook, f)
-            
+
     else:
         cf.exit_program
