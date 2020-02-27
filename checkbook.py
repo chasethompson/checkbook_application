@@ -86,7 +86,7 @@ Please make a selection:
         )
 
         # Add overdraft functionality
-        if new_balance < 0:
+        if float(new_balance) < 0:
             print("\nThis withdraw has brought your account into the negative. We will charge you a $35 overdraft fee.")
             new_balance = format(float(new_balance) - float(35), ".2f")
             print(f"\nYour new balance after the withdraw and overdraft fee is ${new_balance}")
