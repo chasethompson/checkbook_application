@@ -110,4 +110,7 @@ Please make a selection:
 
     # Come back to this, not sure how yet
     elif selection == "4":
-        print("Something")
+        print("New feature coming soon.")
+    else:
+        cf.exit_program
+
