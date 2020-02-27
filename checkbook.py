@@ -1,3 +1,8 @@
+# Features to add
+# Fix exit type to .lower()
+# Fix blank balance on initial balance pull
+# Add a conditon in withdraw if balance is already neagtive to break out with a message
+
 # Used this resource for json/python https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
 import json
 from datetime import datetime
@@ -43,8 +48,8 @@ Please make a selection:
     # Open current user balance file if it exists, if not creates new file
     if os.path.exists("balance.txt"):
         balance = (open("balance.txt", "r"))
-    else: 
-        f = open("balance.txt","w")
+    else:
+        f = open("balance.txt", "w")
         f.write("0.00")
         balance = (open("balance.txt", "r"))
  
@@ -135,6 +140,16 @@ Please make a selection:
         balance = (open("balance.txt", "w"))
         balance.write(str(new_balance))
 
+        checkbook.append(
+            {
+                'log' : len(checkbook),
+                'type' : 'deposit',
+                'amount' : '$' + deposit_amount,
+                'time' : datetime.now().strftime('%H:%M'),
+                'date' : datetime.now().strftime('%m/%d/%y')
+            }
+        )
+
         # Write entries into the checkbook file
         with open("checkbook", "w") as f:
             json.dump(checkbook, f)
@@ -144,4 +159,3 @@ Please make a selection:
         print("\nNew feature coming soon!")
     else:
         cf.exit_program
-
