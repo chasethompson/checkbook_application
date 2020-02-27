@@ -74,7 +74,7 @@ Once you have finished the basic application (in no particular order),
 - [] assign categories to each transaction
     - [] add a menu item to allow the user to view all the transactions in a given category
     - [] provide the user with summary statistics about the transactions in each category
-- [] keep track of the date and time that each transaction happened
+- [x] keep track of the date and time that each transaction happened
     - [] allow the user to view all the transactions for a given day
     - [] make sure your list of previous transactions includes the timestamp for each
 - [] allow the user to optionally provide a description for each transaction

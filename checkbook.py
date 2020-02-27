@@ -9,6 +9,7 @@ import checkbook_functions as cf
 print("\n ---- Welcome to your checkbook ---- ")
 
 # Repeats the loop until user exits program
+# Not sure yet if how I'll do 4
 while True: 
     # User selection options
     print("""
@@ -18,7 +19,7 @@ Please make a selection:
     3) Make A Deposit
     4) View Transactions
     5) Exit (You can also type exit at any prompt to Exit )
-    """) # Not sure yet if how I'll do 4
+    """)
     
     # Requires user to enter valid selection
     while True: 
@@ -34,7 +35,7 @@ Please make a selection:
         with open("checkbook.txt") as f:
             checkbook = json.load(f)
     else: 
-        f= open("checkbook.txt", "w")
+        f = open("checkbook.txt", "w")
         f.write("[]")
         with open("checkbook.txt") as f:
             checkbook = json.load(f)
@@ -43,13 +44,13 @@ Please make a selection:
     if os.path.exists("balance.txt"):
         balance = (open("balance.txt", "r"))
     else: 
-        f= open("balance.txt","w")
-        f.write("0")
+        f = open("balance.txt","w")
+        f.write("0.00")
         balance = (open("balance.txt", "r"))
  
     # Print users current balance
     if selection == "1":
-        print(f"\nYour balance is ${balance.read()}.")
+        print(f"\nYour balance is ${balance.read()}")
 
     # Run loop for user withdraw option
     elif selection == "2":
@@ -74,6 +75,36 @@ Please make a selection:
         balance = (open("balance.txt", "w"))
         balance.write(str(new_balance))
 
+        checkbook.append(
+            {
+                'log' : len(checkbook),
+                'type' : 'withdraw',
+                'amount' : '$' + withdraw_amount,
+                'time' : datetime.now().strftime('%H:%M'),
+                'date' : datetime.now().strftime('%m/%d/%y')
+            }
+        )
+
+        # Add overdraft functionality
+        if new_balance < 0:
+            print("\nThis withdraw has brought your account into the negative. We will charge you a $35 overdraft fee.")
+            new_balance = format(float(new_balance) - float(35), ".2f")
+            print(f"\nYour new balance after the withdraw and overdraft fee is ${new_balance}")
+
+            # Write over old balance with newly created balance after the withdraw and overdraft fee.
+            balance = (open("balance.txt", "w"))
+            balance.write(str(new_balance))
+
+            checkbook.append(
+               {
+                'log' : len(checkbook),
+                'type' : 'overdraft fee',
+                'amount' : '$35.00',
+                'time' : datetime.now().strftime('%H:%M'),
+                'date' : datetime.now().strftime('%m/%d/%y')
+            }
+        ) 
+        
         # Write entries into the checkbook file
         with open("checkbook.txt", "w") as f:
             json.dump(checkbook, f)
