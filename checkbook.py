@@ -17,7 +17,7 @@ Please make a selection:
     2) Make A Withdraw
     3) Make A Deposit
     4) View Transactions
-    6) Exit (You can also type exit at any prompt to Exit )
+    5) Exit (You can also type exit at any prompt to Exit )
     """) # Not sure yet if how I'll do 4
     
     # Requires user to enter valid selection
@@ -28,7 +28,7 @@ Please make a selection:
         elif selection in "1234":
             break
         else:
-            print("Invalid entry.")
+            print("You need to make a selection from the menu.")
     # Open current user checkbook file if it exists, if not creates new file
     if os.path.exists("checkbook.txt"): 
         with open("checkbook.txt") as f:
@@ -49,21 +49,21 @@ Please make a selection:
  
     # Print users current balance
     if selection == "1":
-        print(f"Your balance is ${balance.read()}.")
+        print(f"\nYour balance is ${balance.read()}.")
 
     # Run loop for user withdraw option
     elif selection == "2":
         while True:
-            withdraw_amount = input("How much cash would you like to withdaw? ")
+            withdraw_amount = input("\nHow much cash would you like to withdaw? ")
             if withdraw_amount == "exit":
                 cf.exit_program()
             elif withdraw_amount.replace(".", "").isdigit():
                 break
             else:
-                print(f"{withdraw_amount} is not a valid option. If you want cash, you'll need to enter a numerical value.")
+                print(f"\n{withdraw_amount} is not a valid option. If you want cash, you'll need to enter a numerical value.")
         
         # Enter the correct format
-        with = format(float(withdraw_amount), ".2f")
+        withdraw = format(float(withdraw_amount), ".2f")
         print(f"Your withdrawn amount is: ${withdraw_amount}")
 
         # Diplay new balance to user
@@ -71,7 +71,7 @@ Please make a selection:
         print(f"\nYour current balance is now ${new_balance}")
 
         # Write over old balance with newly created balance after the withdraw
-        balance = (with open("balance.txt", "w"))
+        balance = (open("balance.txt", "w"))
         balance.write(str(new_balance))
 
         # Write entries into the checkbook file
@@ -81,17 +81,17 @@ Please make a selection:
     # Run loop for user deposit option
     elif selection == "3":
         while True:
-            deposit_amount = input("How much would you like to deposit today? ")
+            deposit_amount = input("\nHow much would you like to deposit today? ")
             if deposit_amount == "exit":
                 cf.exit_program()
             elif deposit_amount.replace(".", "").isdigit():
                 break
             else:
-                print(f"{deposit_amount} is not a valid option. Please enter a numerical value to deposit money.")
+                print(f"\n{deposit_amount} is not a valid option. Please enter a numerical value to deposit money.")
         
         # Enter the correct format
         deposit_amount = format(float(deposit_amount), ".2f")
-        print(f"Your deposit amount: ${deposit_amount}")
+        print(f"\nYour deposit amount: ${deposit_amount}")
 
         if deposit_amount == "exit":
             cf.exit_program()
@@ -101,7 +101,7 @@ Please make a selection:
         print(f"\nYour current balance is now ${new_balance}.")
 
         # Write over old balance with newly created balance after the deposit
-        balance = (with open("balance.txt", "w"))
+        balance = (open("balance.txt", "w"))
         balance.write(str(new_balance))
 
         # Write entries into the checkbook file
@@ -110,7 +110,7 @@ Please make a selection:
 
     # Come back to this, not sure how yet
     elif selection == "4":
-        print("New feature coming soon.")
+        print("\nNew feature coming soon!")
     else:
         cf.exit_program
 
