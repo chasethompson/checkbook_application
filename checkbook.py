@@ -146,8 +146,13 @@ Please make a selection:
         )
 
         # Write entries into the checkbook file
-        with open("checkbook", "w") as f:
+        with open("checkbook.txt", "w") as f:
             json.dump(checkbook, f)
-
+    
+    elif selection == "4":
+        print("")
+        print("Thanks! Have a great day!") 
+        print("")
+        break
     else:
         cf.exit_program
